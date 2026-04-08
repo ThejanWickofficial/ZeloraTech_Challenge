@@ -19,7 +19,6 @@ app.get("/api/candidates", (req,res) =>{
     }
     
     res.json(candidates);
-    //res.json({message: "ZeloraTech backend run successfully!!"});
 });
 
 //POST Route for add new canndidate
@@ -32,6 +31,25 @@ app.post("/api/candidates", (req,res) => {
     candidates.push(newCandidate);
     res.status(201).json(newCandidate);
 });
+
+//PUT Route for updating candidates
+app.put("/api/candidates", (req,res) => {
+    const candidateId = req.params.id;
+    const updateData = req.body;
+    const candidateIndex = candidates.findIndex(c => c.id == candidateId);
+
+    if(candidateIndex !== -1){
+        candidates[candidateIndex] = {...candidates}
+    }
+
+});
+
+
+app.get("/api/test", (req,res) =>{
+    res.json({message: "ZeloraTech backend run successfully!!"});
+});
+
+//DELETE Route for removing candidates
 
 app.listen(PORT, () => {
     console.log(`Server is running On PORT number: ${PORT}`);
