@@ -44,12 +44,23 @@ app.put("/api/candidates", (req,res) => {
 
 });
 
+//DELETE Route for removing candidates
+app.delete("/api/candidates", (req,res) => {
+    const candidateId = req.params.id;
+
+    const initialLength = candidates.length;
+    candidates = candidates.filter(c => c.id !== candidateId);
+
+    if (candidates.length < initialLength) {
+        res.json({ message: "Candidate deleted successfully" });
+    } else {
+        res.status(404).json({ message: "Candidate not found" });
+    }
+});
 
 app.get("/api/test", (req,res) =>{
     res.json({message: "ZeloraTech backend run successfully!!"});
 });
-
-//DELETE Route for removing candidates
 
 app.listen(PORT, () => {
     console.log(`Server is running On PORT number: ${PORT}`);
