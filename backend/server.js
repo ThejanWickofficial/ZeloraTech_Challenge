@@ -9,8 +9,17 @@ const PORT = 5001;
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/test", (req,res) =>{
-    res.json({message: "ZeloraTech backend run successfully!!"});
+//GET Route for fletch all candidates
+app.get("/api/candidates", (req,res) =>{
+    const stageQuery = req.query.stage;
+    
+    if (stageQuery) {
+        const filteredCandidates = candidates.filter(c => c.stage === stageQuery);
+        return res.json(filteredCandidates);
+    }
+    
+    res.json(candidates);
+    //res.json({message: "ZeloraTech backend run successfully!!"});
 });
 
 app.listen(PORT, () => {
