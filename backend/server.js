@@ -22,6 +22,17 @@ app.get("/api/candidates", (req,res) =>{
     //res.json({message: "ZeloraTech backend run successfully!!"});
 });
 
+//POST Route for add new canndidate
+app.post("/api/candidates", (req,res) => {
+    const newCandidate = {
+        id: Date.now().toString(), 
+        ...req.body 
+    };
+    
+    candidates.push(newCandidate);
+    res.status(201).json(newCandidate);
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running On PORT number: ${PORT}`);
 });
