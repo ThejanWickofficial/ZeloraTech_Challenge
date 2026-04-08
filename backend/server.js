@@ -48,7 +48,7 @@ app.put("/api/candidates/:id", (req,res) => {
 });
 
 //DELETE Route (for removing candidates)
-app.delete("/api/candidates", (req,res) => {
+app.delete("/api/candidates/:id", (req,res) => {
     const candidateId = req.params.id;
 
     const initialLength = candidates.length;
