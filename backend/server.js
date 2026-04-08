@@ -9,7 +9,7 @@ const PORT = 5001;
 app.use(cors());
 app.use(express.json());
 
-//GET Route for fletch all candidates
+//GET Route (for fletch all candidates)
 app.get("/api/candidates", (req,res) =>{
     const stageQuery = req.query.stage;
     
@@ -21,7 +21,7 @@ app.get("/api/candidates", (req,res) =>{
     res.json(candidates);
 });
 
-//POST Route for add new canndidate
+//POST Route (for add new canndidate)
 app.post("/api/candidates", (req,res) => {
     const newCandidate = {
         id: Date.now().toString(), 
@@ -32,19 +32,22 @@ app.post("/api/candidates", (req,res) => {
     res.status(201).json(newCandidate);
 });
 
-//PUT Route for updating candidates
-app.put("/api/candidates", (req,res) => {
+//PUT Route (for updating candidates)
+app.put("/api/candidates/:id", (req,res) => {
     const candidateId = req.params.id;
     const updateData = req.body;
     const candidateIndex = candidates.findIndex(c => c.id == candidateId);
 
     if(candidateIndex !== -1){
-        candidates[candidateIndex] = {...candidates}
+        candidates[candidateIndex] = { ...candidates[candidateIndex], ...updateData };
+        res.json(candidates[candidateIndex]);
+    }else{
+        res.status(404).json({ message: "Candidate not found" });
     }
 
 });
 
-//DELETE Route for removing candidates
+//DELETE Route (for removing candidates)
 app.delete("/api/candidates", (req,res) => {
     const candidateId = req.params.id;
 
