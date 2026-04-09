@@ -3,7 +3,7 @@ import CandidateCard from './CandidateCard';
 
 const STAGES = ["Applying Period", "Screening", "Interview", "Test"];
 
-function KanbanBoard({ candidates }) {
+function KanbanBoard({ candidates, onMoveCandidate }) {
   return (
     <div className={styles.boardContainer}>
       {STAGES.map((stage) => {
@@ -18,7 +18,11 @@ function KanbanBoard({ candidates }) {
             
             <div className={styles.cardList}>
               {columnCandidates.map(candidate => (
-                <CandidateCard key={candidate.id} candidate={candidate} />
+                <CandidateCard 
+                  key={candidate.id} 
+                  candidate={candidate} 
+                  onMoveCandidate={onMoveCandidate} 
+                />
               ))}
             </div>
           </div>
