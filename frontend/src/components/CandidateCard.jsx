@@ -21,7 +21,11 @@ function CandidateCard({ candidate, onMoveCandidate, onDeleteCandidate, onUpdate
   const avatarBg = getAvatarColor(candidate.name);
 
   const handleSave = () => {
-    onUpdateCandidate(candidate.id, formData);
+    const finalData = {
+      ...formData,
+      overallScore: parseFloat(formData.overallScore) || 0
+    };
+    onUpdateCandidate(candidate.id, finalData);
     setIsEditing(false); 
   };
 
