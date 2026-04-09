@@ -13,7 +13,7 @@ const getStageColor = (stage) => {
   }
 };
 
-function KanbanBoard({ candidates, onMoveCandidate }) {
+function KanbanBoard({ candidates, onMoveCandidate, onDeleteCandidate, onUpdateCandidate }) {
   return (
     <div className={styles.boardContainer}>
       {STAGES.map((stage) => {
@@ -42,6 +42,8 @@ function KanbanBoard({ candidates, onMoveCandidate }) {
                   key={candidate.id} 
                   candidate={candidate} 
                   onMoveCandidate={onMoveCandidate} 
+                  onDeleteCandidate={onDeleteCandidate}
+                  onUpdateCandidate={onUpdateCandidate}
                 />
               ))}
             </div>
