@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './CandidateCard.module.css';
 
 const getAvatarColor = (name) => {
@@ -6,7 +7,9 @@ const getAvatarColor = (name) => {
   return colors[index];
 };
 
-function CandidateCard({ candidate, onMoveCandidate }) {
+function CandidateCard({ candidate, onMoveCandidate, onDeleteCandidate, onUpdateCandidate }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   const avatarBg = getAvatarColor(candidate.name);
 
   return (
@@ -18,6 +21,35 @@ function CandidateCard({ candidate, onMoveCandidate }) {
         <div className={styles.info}>
           <h4>{candidate.name}</h4>
           <p>Applied at {candidate.appliedDate}</p>
+        </div>
+        
+        <div className={styles.menuContainer}>
+          <button 
+            className={styles.menuBtn} 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            ...
+          </button>
+          
+          {isMenuOpen && (
+            <div className={styles.dropdownMenu}>
+              <button onClick={() => {
+                onUpdateCandidate(candidate.id, candidate.name);
+                setIsMenuOpen(false);
+              }}>
+                ✏️ Edit Name
+              </button>
+              <button 
+                className={styles.deleteBtn}
+                onClick={() => {
+                  onDeleteCandidate(candidate.id);
+                  setIsMenuOpen(false);
+                }}
+              >
+                🗑️ Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
       
