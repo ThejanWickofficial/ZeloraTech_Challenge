@@ -42,7 +42,6 @@ function App() {
 
   return (
     <div style={{ padding: '30px', fontFamily: 'Inter, sans-serif', backgroundColor: '#ffffff', minHeight: '100vh' }}>
-      <h1 style={{ marginBottom: '30px', color: '#111827' }}>ZeloraTech Recruitment Pipeline</h1>
       
       <TopNav />
 
