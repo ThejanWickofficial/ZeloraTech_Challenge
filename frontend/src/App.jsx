@@ -80,26 +80,24 @@ function App() {
     }
   };
 
-  const handleUpdateCandidate = async (candidateId, currentName) => {
-    const newName = window.prompt("Update candidate's name:", currentName);
-    
-    if (newName && newName.trim() !== "" && newName !== currentName) {
-      try {
-        const response = await fetch(`http://localhost:5001/api/candidates/${candidateId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: newName }), 
-        });
+  const handleUpdateCandidate = async (candidateId, updatedData) => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/candidates/${candidateId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData), 
+      });
 
-        if (response.ok) {
-          const updatedCandidate = await response.json();
-          setCandidates((prevCandidates) =>
-            prevCandidates.map((c) => (c.id === candidateId ? updatedCandidate : c))
-          );
-        }
-      } catch (error) {
-        console.error("Error updating candidate:", error);
+      if (response.ok) {
+        const updatedCandidate = await response.json();
+        setCandidates((prevCandidates) =>
+          prevCandidates.map((c) => (c.id === candidateId ? updatedCandidate : c))
+        );
+      } else {
+        console.error("Failed to update candidate");
       }
+    } catch (error) {
+      console.error("Error updating candidate:", error);
     }
   };
 
