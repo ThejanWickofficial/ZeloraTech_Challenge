@@ -2,7 +2,7 @@
 
 A full-stack web application built for the ZeloraTech technical challenge. This project features a responsive, interactive Kanban-style recruitment dashboard designed to manage candidates across different hiring stages seamlessly.
 
-## 🚀 Features
+## Features
 
 * **Interactive Kanban Board:** Candidates are dynamically sorted into stages ("Applying Period", "Screening", "Interview", "Test").
 * **Full CRUD Operations:** * **Create:** Add new candidates via a sleek, responsive modal overlay.
@@ -12,7 +12,7 @@ A full-stack web application built for the ZeloraTech technical challenge. This 
 * **Client-Side Validation:** Form inputs are sanitized in real-time (e.g., overall scores are strictly capped between 0 and 5, retaining proper decimals).
 * **Scoped Styling:** Built using modular CSS to ensure styles are contained and maintainable without relying on external UI frameworks.
 
-## 💻 Tech Stack
+## Tech Stack
 
 **Frontend:**
 * React.js
@@ -24,7 +24,7 @@ A full-stack web application built for the ZeloraTech technical challenge. This 
 * Express.js
 * CORS
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 To run this project locally, you will need to start both the backend server and the frontend development server in two separate terminal windows.
 
@@ -52,7 +52,7 @@ npm run dev
 \`\`\`
 *The frontend application will run on http://localhost:5173*
 
-## 📝 Architecture Notes
+## Architecture Notes
 
 **In-Memory Database:** To prioritize a frictionless setup experience for the reviewer, the backend utilizes an in-memory data store (`data.js`) rather than requiring a dedicated external database instance (like PostgreSQL or MongoDB). 
 
