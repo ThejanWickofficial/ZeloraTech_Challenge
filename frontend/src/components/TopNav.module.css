@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Dark Top Bar Styles */
+.darkBar {
+  background-color: #1e1b4b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  height: 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+}
+
+.logoIcon { color: #facc15; font-size: 20px; }
+
+.centerPills {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.pill, .pillActive {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.pillActive {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.badge { background-color: #334155; padding: 2px 6px; border-radius: 10px; font-size: 12px; }
+.badgeOrange { background-color: #ea580c; color: white; padding: 2px 6px; border-radius: 10px; font-size: 12px; }
+
+.rightActions { display: flex; gap: 12px; align-items: center; }
+.actionBtn { background: #334155; border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
+.profilePic { background: #cbd5e1; color: #1e1b4b; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+/* Header Area Styles */
+.headerArea {
+  padding: 24px 30px 0 30px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.backBtn {
+  background: white; border: 1px solid #e2e8f0; border-radius: 50%; width: 36px; height: 36px; margin-right: 16px; cursor: pointer;
+}
+
+.titleRow h2 { margin: 0; font-size: 24px; color: #1e293b; display: flex; align-items: center; gap: 8px; flex: 1; }
+.dropdownArrow { color: #94a3b8; font-size: 20px; }
+
+.shareBtn {
+  background-color: #0f766e; color: white; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: 500;
+}
+
+.tabsRow { display: flex; gap: 24px; font-size: 14px; font-weight: 500; color: #64748b; }
+.tab { padding-bottom: 12px; cursor: pointer; }
+.activeTab { color: #1e293b; border-bottom: 2px solid #1e293b; }
+
+/* Filter Bar Styles */
+.filterBar {
+  display: flex;
+  gap: 12px;
+  padding: 16px 30px;
+  align-items: center;
+}
+
+.searchBox {
+  display: flex; align-items: center; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 12px; background: white; width: 250px;
+}
+.searchBox input { border: none; outline: none; margin-left: 8px; width: 100%; }
+
+.filterDropdown {
+  border: 1px solid #e2e8f0; background: white; padding: 8px 12px; border-radius: 6px; color: #475569; font-size: 14px; cursor: pointer;
+}
