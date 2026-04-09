@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import KanbanBoard from './components/KanbanBoard';
+import TopNav from './components/TopNav';
 
 function App() {
   const [candidates, setCandidates] = useState([]);
@@ -43,6 +44,8 @@ function App() {
     <div style={{ padding: '30px', fontFamily: 'Inter, sans-serif', backgroundColor: '#ffffff', minHeight: '100vh' }}>
       <h1 style={{ marginBottom: '30px', color: '#111827' }}>ZeloraTech Recruitment Pipeline</h1>
       
+      <TopNav />
+
       {loading ? (
         <p>Loading candidates from backend...</p>
       ) : (
