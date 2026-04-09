@@ -53,3 +53,25 @@
   color: #2563eb;
   font-weight: 500;
 }
+
+.moveAction {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.moveSelect {
+  width: 100%;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.moveSelect:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
