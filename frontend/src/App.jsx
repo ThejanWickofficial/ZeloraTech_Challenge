@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import KanbanBoard from './components/KanbanBoard';
+import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import Sidebar from './components/SideBar';
 
 function App() {
   const [candidates, setCandidates] = useState([]);
@@ -21,34 +21,57 @@ function App() {
     try {
       const response = await fetch(`http://localhost:5001/api/candidates/${candidateId}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stage: newStage }),
       });
 
       if (response.ok) {
         const updatedCandidate = await response.json();
-        
         setCandidates((prevCandidates) =>
           prevCandidates.map((c) => (c.id === candidateId ? updatedCandidate : c))
         );
-      } else {
-        console.error("Failed to update candidate on the backend");
       }
     } catch (error) {
       console.error("Error updating candidate:", error);
     }
   };
 
- return (
+  const handleAddCandidate = async (candidateName) => {
+    const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    
+    const newCandidateData = {
+      name: candidateName,
+      stage: "Applying Period",
+      appliedDate: today,
+      overallScore: 0, 
+      isReferred: false,
+      hasAssessment: false
+    };
+
+    try {
+      const response = await fetch('http://localhost:5001/api/candidates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newCandidateData),
+      });
+
+      if (response.ok) {
+        const createdCandidate = await response.json();
+        setCandidates((prev) => [...prev, createdCandidate]);
+      }
+    } catch (error) {
+      console.error("Error creating candidate:", error);
+    }
+  };
+
+  return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#ffffff', fontFamily: 'Inter, sans-serif' }}>
       
       <Sidebar />
 
       <div style={{ marginLeft: '70px', width: '100%', display: 'flex', flexDirection: 'column' }}>
         
-        <TopNav />
+        <TopNav onAddCandidate={handleAddCandidate} />
 
         <div style={{ padding: '10px 30px 30px 30px' }}>
           {loading ? (
