@@ -71,8 +71,21 @@ function CreateModal({ onClose, onSave }) {
                 step="0.1" 
                 max="5"
                 value={formData.overallScore}
-                onChange={(e) => setFormData({...formData, overallScore: parseFloat(e.target.value)})}
-              />
+                onChange={(e) => {
+                    let val = e.target.value;
+                    
+                    if (val === "") {
+                    setFormData({...formData, overallScore: ""});
+                    return;
+                    }
+
+                    let num = parseFloat(val);
+                    
+                    if (num > 5) num = 5;
+                    if (num < 0) num = 0;
+
+                    setFormData({...formData, overallScore: num});
+                }}/>
             </div>
             
             <div className={styles.checkboxGroup}>
