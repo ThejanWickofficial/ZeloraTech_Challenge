@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import KanbanBoard from './components/KanbanBoard';
 
 function App() {
   const [candidates, setCandidates] = useState([]);
@@ -15,18 +16,13 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>ZeloraTech Recruitment Pipeline</h1>
+    <div style={{ padding: '30px', fontFamily: 'Inter, sans-serif', backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <h1 style={{ marginBottom: '30px', color: '#111827' }}>ZeloraTech Recruitment Pipeline</h1>
       
       {loading ? (
         <p>Loading candidates from backend...</p>
       ) : (
-        <div>
-          <h2>Raw Data Connection Test:</h2>
-          <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
-            {JSON.stringify(candidates, null, 2)}
-          </pre>
-        </div>
+        <KanbanBoard candidates={candidates} />
       )}
     </div>
   );
