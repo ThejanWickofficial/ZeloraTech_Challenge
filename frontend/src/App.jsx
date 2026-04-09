@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import KanbanBoard from './components/KanbanBoard';
 import TopNav from './components/TopNav';
+import Sidebar from './components/SideBar';
 
 function App() {
   const [candidates, setCandidates] = useState([]);
@@ -40,16 +41,24 @@ function App() {
     }
   };
 
-  return (
-    <div style={{ padding: '30px', fontFamily: 'Inter, sans-serif', backgroundColor: '#ffffff', minHeight: '100vh' }}>
+ return (
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#ffffff', fontFamily: 'Inter, sans-serif' }}>
       
-      <TopNav />
+      <Sidebar />
 
-      {loading ? (
-        <p>Loading candidates from backend...</p>
-      ) : (
-        <KanbanBoard candidates={candidates} />
-      )}
+      <div style={{ marginLeft: '70px', width: '100%', display: 'flex', flexDirection: 'column' }}>
+        
+        <TopNav />
+
+        <div style={{ padding: '10px 30px 30px 30px' }}>
+          {loading ? (
+            <p>Loading candidates from backend...</p>
+          ) : (
+            <KanbanBoard candidates={candidates} onMoveCandidate={handleMoveCandidate} />
+          )}
+        </div>
+
+      </div>
     </div>
   );
 }
