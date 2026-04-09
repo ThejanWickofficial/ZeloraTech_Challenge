@@ -1,16 +1,9 @@
 import styles from './TopNav.module.css';
 
-function TopNav({ onAddCandidate }) {
-    const handlePlusClick = () => {
-    const name = window.prompt("Enter the new candidate's name:");
-    if (name && name.trim() !== "") {
-      onAddCandidate(name);
-    }
-  };
-
+function TopNav({ onOpenCreateModal }) {
+  
   return (
     <div className={styles.container}>
-      {/* Top dark Bar */}
       <div className={styles.darkBar}>
         <div className={styles.brand}>
           <span className={styles.logoIcon}>⚄</span> tiimi <strong>Recruitment</strong>
@@ -23,13 +16,13 @@ function TopNav({ onAddCandidate }) {
         </div>
 
         <div className={styles.rightActions}>
-          <button className={styles.actionBtn} onClick={handlePlusClick}>+</button>
+          <button className={styles.actionBtn} onClick={onOpenCreateModal}>+</button>
           <button className={styles.actionBtn}>🔍</button>
           <button className={styles.actionBtn}>🔔</button>
           <div className={styles.profilePic}>T</div>
         </div>
       </div>
-      
+
         {/* Title row & Tabs area */}
       <div className={styles.headerArea}>
         <div className={styles.titleRow}>
