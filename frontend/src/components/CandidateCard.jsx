@@ -10,7 +10,67 @@ const getAvatarColor = (name) => {
 function CandidateCard({ candidate, onMoveCandidate, onDeleteCandidate, onUpdateCandidate }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: candidate.name,
+    appliedDate: candidate.appliedDate,
+    overallScore: candidate.overallScore,
+    isReferred: candidate.isReferred
+  });
+
   const avatarBg = getAvatarColor(candidate.name);
+
+  const handleSave = () => {
+    onUpdateCandidate(candidate.id, formData);
+    setIsEditing(false); 
+  };
+
+  if (isEditing) {
+    return (
+      <div className={styles.card}>
+        <div className={styles.editForm}>
+          <input 
+            type="text" 
+            value={formData.name} 
+            onChange={(e) => setFormData({...formData, name: e.target.value})} 
+            placeholder="Candidate Name"
+            className={styles.editInput}
+          />
+          <input 
+            type="text" 
+            value={formData.appliedDate} 
+            onChange={(e) => setFormData({...formData, appliedDate: e.target.value})} 
+            placeholder="e.g. 10 Apr, 2026"
+            className={styles.editInput}
+          />
+          <div className={styles.editRow}>
+            <input 
+              type="number" 
+              step="0.1" 
+              max="5"
+              value={formData.overallScore} 
+              onChange={(e) => setFormData({...formData, overallScore: parseFloat(e.target.value)})} 
+              className={styles.editInput}
+              style={{ width: '80px' }}
+            />
+            <label className={styles.checkboxLabel}>
+              <input 
+                type="checkbox" 
+                checked={formData.isReferred} 
+                onChange={(e) => setFormData({...formData, isReferred: e.target.checked})} 
+              />
+              Referred
+            </label>
+          </div>
+          
+          <div className={styles.editActions}>
+            <button className={styles.saveBtn} onClick={handleSave}>Save</button>
+            <button className={styles.cancelBtn} onClick={() => setIsEditing(false)}>Cancel</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.card}>
@@ -24,27 +84,16 @@ function CandidateCard({ candidate, onMoveCandidate, onDeleteCandidate, onUpdate
         </div>
         
         <div className={styles.menuContainer}>
-          <button 
-            className={styles.menuBtn} 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            ...
-          </button>
+          <button className={styles.menuBtn} onClick={() => setIsMenuOpen(!isMenuOpen)}>...</button>
           
           {isMenuOpen && (
             <div className={styles.dropdownMenu}>
-              <button onClick={() => {
-                onUpdateCandidate(candidate.id, candidate.name);
-                setIsMenuOpen(false);
-              }}>
-                ✏️ Edit Name
+              <button onClick={() => { setIsEditing(true); setIsMenuOpen(false); }}>
+                ✏️ Edit Details
               </button>
               <button 
                 className={styles.deleteBtn}
-                onClick={() => {
-                  onDeleteCandidate(candidate.id);
-                  setIsMenuOpen(false);
-                }}
+                onClick={() => { onDeleteCandidate(candidate.id); setIsMenuOpen(false); }}
               >
                 🗑️ Delete
               </button>
