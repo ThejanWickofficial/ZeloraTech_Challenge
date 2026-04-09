@@ -104,9 +104,7 @@ function App() {
       <Sidebar />
 
       <div style={{ marginLeft: '70px', width: '100%', display: 'flex', flexDirection: 'column' }}>
-        
-        <TopNav onAddCandidate={handleAddCandidate} />
-
+        <TopNav onOpenCreateModal={() => setIsModalOpen(true)} />
         <div style={{ padding: '10px 30px 30px 30px' }}>
           {loading ? (
             <p>Loading candidates from backend...</p>

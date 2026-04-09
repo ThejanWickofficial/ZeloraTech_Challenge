@@ -1,7 +1,6 @@
 import styles from './TopNav.module.css';
 
 function TopNav({ onOpenCreateModal }) {
-  
   return (
     <div className={styles.container}>
       <div className={styles.darkBar}>
@@ -22,6 +21,7 @@ function TopNav({ onOpenCreateModal }) {
           <div className={styles.profilePic}>T</div>
         </div>
       </div>
+
 
         {/* Title row & Tabs area */}
       <div className={styles.headerArea}>
