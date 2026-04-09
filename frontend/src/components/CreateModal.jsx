@@ -10,12 +10,15 @@ function CreateModal({ onClose, onSave }) {
     isReferred: false,
     hasAssessment: false
   });
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name) return alert("Name is required!");
-    
-    onSave(formData);
+        const finalData = {
+      ...formData,
+      overallScore: parseFloat(formData.overallScore) || 0
+    };
+    onSave(finalData);
   };
 
   return (
@@ -72,19 +75,22 @@ function CreateModal({ onClose, onSave }) {
                 max="5"
                 value={formData.overallScore}
                 onChange={(e) => {
-                    let val = e.target.value;
-                    
-                    if (val === "") {
-                    setFormData({...formData, overallScore: ""});
+                  let val = e.target.value;
+
+                  if (val === "") {
+                    setFormData({ ...formData, overallScore: "" });
                     return;
-                    }
+                  }
 
-                    let num = parseFloat(val);
-                    
-                    if (num > 5) num = 5;
-                    if (num < 0) num = 0;
+                  if (parseFloat(val) > 5) {
+                    val = "5";
+                    e.target.value = "5";
+                  } else if (parseFloat(val) < 0) {
+                    val = "0";
+                    e.target.value = "0";
+                  }
 
-                    setFormData({...formData, overallScore: num});
+                  setFormData({ ...formData, overallScore: val });
                 }}/>
             </div>
             

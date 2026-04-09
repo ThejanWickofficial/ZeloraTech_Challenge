@@ -53,9 +53,23 @@ function CandidateCard({ candidate, onMoveCandidate, onDeleteCandidate, onUpdate
               step="0.1" 
               max="5"
               value={formData.overallScore} 
-              onChange={(e) => setFormData({...formData, overallScore: parseFloat(e.target.value)})} 
               className={styles.editInput}
               style={{ width: '80px' }}
+              onChange={(e) => {
+                let val = e.target.value;
+                if (val === "") {
+                  setFormData({ ...formData, overallScore: "" });
+                  return;
+                }
+                if (parseFloat(val) > 5) {
+                  val = "5";
+                  e.target.value = "5"; 
+                } else if (parseFloat(val) < 0) {
+                  val = "0";
+                  e.target.value = "0";
+                }
+                setFormData({ ...formData, overallScore: val });
+              }} 
             />
             <label className={styles.checkboxLabel}>
               <input 
