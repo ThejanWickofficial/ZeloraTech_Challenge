@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import KanbanBoard from './components/KanbanBoard';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
+import CreateModal from './components/CreateModal'; 
 
 function App() {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:5001/api/candidates')
@@ -35,29 +37,18 @@ function App() {
       console.error("Error updating candidate:", error);
     }
   };
-
-  const handleAddCandidate = async (candidateName) => {
-    const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    
-    const newCandidateData = {
-      name: candidateName,
-      stage: "Applying Period",
-      appliedDate: today,
-      overallScore: 0, 
-      isReferred: false,
-      hasAssessment: false
-    };
-
+  const handleAddCandidate = async (newCandidateData) => {
     try {
       const response = await fetch('http://localhost:5001/api/candidates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newCandidateData),
+        body: JSON.stringify(newCandidateData), 
       });
 
       if (response.ok) {
         const createdCandidate = await response.json();
         setCandidates((prev) => [...prev, createdCandidate]);
+        setIsModalOpen(false); 
       }
     } catch (error) {
       console.error("Error creating candidate:", error);
@@ -103,6 +94,12 @@ function App() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#ffffff', fontFamily: 'Inter, sans-serif' }}>
+      {isModalOpen && (
+        <CreateModal 
+          onClose={() => setIsModalOpen(false)} 
+          onSave={handleAddCandidate} 
+        />
+      )}
       
       <Sidebar />
 
